@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace 'api' do
+    namespace 'v1' do
+      namespace 'admin' do
+        resources :advertisers, only: [:index, :show, :create, :update]
+        resources :offers, only: [:create, :update, :destroy]
+      end
+      resources :offers, only: [:index]
+    end
+  end
 end
