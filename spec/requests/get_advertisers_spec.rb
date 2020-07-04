@@ -13,7 +13,7 @@ describe "get all advertisers route", :type => :request do
     expect(subject["data"][0]["url"]).not_to be_empty
   end
 
-  it 'returns status code 200' do
+  it 'returns status code 202' do
     expect(response).to have_http_status(:success)
   end
 end
