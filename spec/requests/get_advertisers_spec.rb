@@ -17,3 +17,20 @@ describe "get all advertisers route", :type => :request do
     expect(response).to have_http_status(:success)
   end
 end
+
+describe "get advertiser by id route", :type => :request do
+  let!(:advertiser) {FactoryBot.create(:advertisers)}
+
+  before {get "/api/v1/admin/advertisers/#{advertiser.id}"}
+
+  it 'returns the advertiser' do
+    subject = JSON.parse(response.body)
+
+    expect(subject["data"]["name"]).to eq(advertiser.name)
+    expect(subject["data"]["url"]).to eq(advertiser.url)
+  end
+
+  it 'returns status code 200' do
+    expect(response).to have_http_status(:success)
+  end
+end
