@@ -24,9 +24,24 @@ describe "post a advertiser route", :type => :request do
         post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart@com'}
       end
 
-      it 'returns the advertiser' do
+      it 'returns error' do
         subject = JSON.parse(response.body)
         expect(subject["data"]).to eq("url"=>["is invalid"])
+      end
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
+
+    describe 'Without needed params' do
+      before do
+        post '/api/v1/admin/advertisers', params: {}
+      end
+
+      it 'returns error' do
+        subject = JSON.parse(response.body)
+        expect(subject["data"]).to eq("name"=>["can't be blank"], "url"=>["can't be blank", "is invalid"])
       end
 
       it 'returns status code 422' do
@@ -40,7 +55,7 @@ describe "post a advertiser route", :type => :request do
         post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}
       end
 
-      it 'returns the advertiser' do
+      it 'returns error' do
         subject = JSON.parse(response.body)
         expect(subject["data"]).to eq("name"=>["has already been taken"])
       end
