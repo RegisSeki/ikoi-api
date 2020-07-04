@@ -2,7 +2,9 @@ module Api
   module V1
     module Admin
       class OffersController < ApplicationController
-        def show
+        def index
+          offers = Offer.all
+          render json: {status: 'SUCCESS', message: 'All offers', data:offers}, status: :ok
         end
 
         def create
