@@ -3,7 +3,7 @@ module Api
     class OffersController < ApplicationController
       def index
         offers = Offer.enabled_offers
-        render json: {status: 'SUCCESS', message:'Offer Updated', data:offers},status: :ok
+        render json: {status: 'SUCCESS', message:'Offers list', data:offers},status: :ok
       end
     end
   end

@@ -11,6 +11,6 @@ class Offer < ApplicationRecord
   end
 
   def self.enabled_offers
-    where("starts_at <= ? AND (ends_at >= ? OR ends_at IS NULL)", Time.now, Time.now).order("premium = true DESC")
+    where("starts_at <= ? AND (ends_at >= ? OR ends_at IS NULL)", Time.now, Time.now).order(Arel.sql("premium = true DESC"))
   end
 end
