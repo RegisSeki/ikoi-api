@@ -115,7 +115,7 @@ At the project folder run ```rspec```
 
 This project is hosted at heroku on https://rts-lemoney-api.herokuapp.com/
 All the get routes are free to access, the others need the login and password.
-Fell free to use all the get routes, if is neccessary ask the keys to me on regis.seki@gmail.com.
+Fell free to use all the get routes, if is necessary ask the keys to me on regis.seki@gmail.com.
 
 Made by [Regis Seki](https://github.com/RegisSeki)
 Last updated: July 2020
