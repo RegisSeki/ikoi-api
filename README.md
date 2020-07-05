@@ -83,7 +83,7 @@ In this module the administrator have to control the Advertisers and Offers.
 ***Retrieve all enabled Offers***
 * ***GET*** /api/v1/offers
 
-### About the rules to an offer be showed at the user offer list
+### About the rules to an offer to be showed at the user offer list
 *extracted from the INSTRUCTIONS.pdf*
 
 1. when created, state = disabled
@@ -97,8 +97,8 @@ pear on top.
 
 To solve this rules the trick is at starts_at, ands_at and premium offers values
 
-1. To enable an offer the starts_at should be greater than the time at server at the moment of the request and the ends_at should be less; The administrator have to control enabled and disabled offers by this 2 rules. To do that just update the offer with the proper date and time at starts_at and ends_at.
-2. If have no ends_at and the starts_at is greater than the server request time, this offer will always appear.
+1. To enable an offer the starts_at should be less than the time at the server at the moment of the request and the ends_at should be greater; The administrator have to control enabled and disabled offers by this 2 rules. To do that just update the offer with the proper date and time at starts_at and ends_at.
+2. If it have no ends_at and the starts_at is less than the server request time, this offer will always appear.
 3. When the premium value is true, the offer will always appear on the top.
 
 ### Installation
