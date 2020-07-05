@@ -5,7 +5,7 @@ describe "get all advertisers route", :type => :request do
 
   before {get '/api/v1/admin/advertisers'}
 
-  it 'returns all advertisers' do
+  it 'return all advertisers' do
     subject = JSON.parse(response.body)
 
     expect(subject["data"].size).to eq(5)
@@ -13,7 +13,7 @@ describe "get all advertisers route", :type => :request do
     expect(subject["data"][0]["url"]).not_to be_empty
   end
 
-  it 'returns status code 202' do
+  it 'return status code 200' do
     expect(response).to have_http_status(:success)
   end
 end
@@ -23,14 +23,14 @@ describe "get advertiser by id route", :type => :request do
 
   before {get "/api/v1/admin/advertisers/#{advertiser.id}"}
 
-  it 'returns the advertiser' do
+  it 'return the advertiser' do
     subject = JSON.parse(response.body)
 
     expect(subject["data"]["name"]).to eq(advertiser.name)
     expect(subject["data"]["url"]).to eq(advertiser.url)
   end
 
-  it 'returns status code 200' do
+  it 'return status code 200' do
     expect(response).to have_http_status(:success)
   end
 end

@@ -1,25 +1,27 @@
 require 'rails_helper'
 
-describe "post an advertiser route", :type => :request do
+describe "post advertiser route", :type => :request do
 
   describe 'Success' do
-    before do
-      post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}
-    end
+    describe 'when all the parameters are correct' do
+      before do
+        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}
+      end
 
-    it 'return the advertiser' do
-      subject = JSON.parse(response.body)
-      expect(subject["data"]["name"]).to eq('Walmart')
-      expect(subject["data"]["url"]).to eq('https://wallmart.com')
-    end
+      it 'return the advertiser' do
+        subject = JSON.parse(response.body)
+        expect(subject["data"]["name"]).to eq('Walmart')
+        expect(subject["data"]["url"]).to eq('https://wallmart.com')
+      end
 
-    it 'return status code 200' do
-      expect(response).to have_http_status(:success)
+      it 'return status code 200' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
   describe 'Fail' do
-    describe 'Url not valid' do
+    describe 'when url parameter is not valid' do
       before do
         post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart@com'}
       end
@@ -34,7 +36,7 @@ describe "post an advertiser route", :type => :request do
       end
     end
 
-    describe 'Without needed params' do
+    describe 'when without needed params' do
       before do
         post '/api/v1/admin/advertisers', params: {}
       end
@@ -49,7 +51,7 @@ describe "post an advertiser route", :type => :request do
       end
     end
 
-    describe 'Advertiser already exist' do
+    describe 'when advertiser already exist' do
       before do
         Advertiser.create(name: 'Walmart', url: 'https://wallmart.com')
         post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}

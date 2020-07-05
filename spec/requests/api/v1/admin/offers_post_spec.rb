@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-describe "post an offer route", :type => :request do
+describe "post offer route", :type => :request do
   let!(:advertiser) {FactoryBot.create(:advertisers)}
+  let!(:offers) {FactoryBot.create_list(:offers, 5)}
 
   describe 'Success' do
-    describe 'with correct parameters' do
+    describe 'when correct parameters' do
       before do
-        Offer.create(advertiser_id: advertiser.id, url: 'https://walmart.com/owesome-sale', description: 'Owesome sale', starts_at: '2020-07-03 20:30:00')
-
         post '/api/v1/admin/offers', params:
         {
           :advertiser_id => "#{advertiser.id}",
@@ -20,7 +19,7 @@ describe "post an offer route", :type => :request do
 
       it 'return current offer and all others offers of this advertiser' do
         subject = JSON.parse(response.body)
-        expect(subject["data"].size).to eq 2
+        expect(subject["data"].size).to eq 6
       end
 
       it 'return status code 200' do
@@ -30,7 +29,7 @@ describe "post an offer route", :type => :request do
   end
 
   describe 'Fail' do
-    describe 'with wrong advertiser id parameter' do
+    describe 'when wrong advertiser id parameter' do
       before do
         post '/api/v1/admin/offers', params:
           {
@@ -52,7 +51,7 @@ describe "post an offer route", :type => :request do
       end
     end
 
-    describe 'url parameter not valid' do
+    describe 'when url parameter not valid' do
       before do
         post '/api/v1/admin/offers', params:
           {
@@ -74,7 +73,7 @@ describe "post an offer route", :type => :request do
       end
     end
 
-    describe 'description parameter too big' do
+    describe 'when description parameter too big' do
       before do
         post '/api/v1/admin/offers', params:
           {

@@ -82,7 +82,7 @@ describe "put offer route", :type => :request do
   end
 
   describe 'Fail' do
-    describe 'wrong advertiser id parameter' do
+    describe 'when wrong advertiser id parameter' do
       before do
         @params = OpenStruct.new
         @params.advertiser_id = ""
@@ -111,7 +111,7 @@ describe "put offer route", :type => :request do
       end
     end
 
-    describe 'url parameter not valid' do
+    describe 'when url parameter is not valid' do
       before do
         @params = OpenStruct.new
         @params.advertiser_id = offers.advertiser.id
@@ -140,7 +140,7 @@ describe "put offer route", :type => :request do
       end
     end
 
-    describe 'description parameter greater than 500 characters advertiser id' do
+    describe 'when description parameter is greater than 500 characters advertiser id' do
       before do
         @params = OpenStruct.new
         @params.advertiser_id = offers.advertiser.id

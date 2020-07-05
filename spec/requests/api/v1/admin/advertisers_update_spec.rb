@@ -1,22 +1,25 @@
 require 'rails_helper'
 
-describe "put an advertiser route", :type => :request do
+describe "put advertiser route", :type => :request do
 
   describe 'Success' do
     let!(:advertiser) {FactoryBot.create(:advertisers)}
 
-    before do
-      put "/api/v1/admin/advertisers/#{advertiser.id}", params: {:name => 'Walmart', :url => 'https://wallmart.com'}
-    end
+    describe 'when all parameters are correct' do
 
-    it 'return the advertiser updated' do
-      subject = JSON.parse(response.body)
-      expect(subject["data"]["name"]).to eq('Walmart')
-      expect(subject["data"]["url"]).to eq('https://wallmart.com')
-    end
+      before do
+        put "/api/v1/admin/advertisers/#{advertiser.id}", params: {:name => 'Walmart', :url => 'https://wallmart.com'}
+      end
 
-    it 'return status code 200' do
-      expect(response).to have_http_status(:success)
+      it 'return the advertiser updated' do
+        subject = JSON.parse(response.body)
+        expect(subject["data"]["name"]).to eq('Walmart')
+        expect(subject["data"]["url"]).to eq('https://wallmart.com')
+      end
+
+      it 'return status code 200' do
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
@@ -26,7 +29,7 @@ describe "put an advertiser route", :type => :request do
       @trying_update_advertiser = Advertiser.create(name: 'Carrefour', url: 'https://carrefour.com')
     end
 
-    describe 'Url not valid' do
+    describe 'when url not valid' do
       before do
         put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Carrefour', :url => 'https://carrefour@com?@'}
       end
@@ -41,7 +44,7 @@ describe "put an advertiser route", :type => :request do
       end
     end
 
-    describe 'Advertiser name already exist' do
+    describe 'when advertiser name already exist' do
       before do
         put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Walmart', :url => 'https://walmart.com'}
       end
