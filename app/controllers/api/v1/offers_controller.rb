@@ -1,3 +1,5 @@
+include ActionController::HttpAuthentication::Basic::ControllerMethods
+
 module Api
   module V1
     class OffersController < ApplicationController
