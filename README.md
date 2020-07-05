@@ -105,9 +105,9 @@ To solve this rules the trick is at starts_at, ands_at and premium offers values
 #### To run the project locally:
 - Install the apropriate Ruby version
 - Clone the project
-- Bundle install ```bundle install```
-- Run the migration ```rails db:migrate```
-- Up the server ```rails server```
+- Bundle install run ```bundle install```
+- Run the migration run ```rails db:migrate```
+- Up the server run ```rails server```
 - Enjoy the features
 
 ##### To Run the tests RSPEC
