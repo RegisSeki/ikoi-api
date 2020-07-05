@@ -9,15 +9,15 @@ module Api
 
         def show
           advertiser = Advertiser.find(params[:id])
-          render json: {status: 'SUCCESS', message: '', data: advertiser}, status: :ok
+          render json: {status: 'SUCCESS', message: 'Advertiser', data: advertiser}, status: :ok
         end
 
         def create
           advertiser = Advertiser.new(advertiser_params)
           if advertiser.save
-            render json: {status: 'SUCCESS', message:'Advertiser saved', data:advertiser},status: :ok
+            render json: {status: 'SUCCESS', message:'Advertiser created', data:advertiser},status: :ok
           else
-            render json: {status: 'ERROR', message:'Advertiser not saved', data:advertiser.errors},status: :unprocessable_entity
+            render json: {status: 'ERROR', message:'Advertiser not created', data:advertiser.errors},status: :unprocessable_entity
           end
         end
 
