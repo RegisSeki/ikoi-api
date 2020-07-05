@@ -24,7 +24,7 @@ describe "put offer route", :type => :request do
         }
       end
 
-      it 'return updated offer with the same values at parameters' do
+      it 'return updated offer with the same values of parameters' do
         subject = JSON.parse(response.body)
 
         expect(subject["data"]["advertiser_id"]).to eq @params.advertiser_id

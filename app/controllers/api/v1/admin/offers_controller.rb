@@ -10,7 +10,7 @@ module Api
         def create
           offer = Offer.new(offer_params)
           if offer.save
-            render json: {status: 'SUCCESS', message:"Offer Saved!", data:Offer.all},status: :ok
+            render json: {status: 'SUCCESS', message:"Offer Saved!", data:Offer.order_by_desc},status: :ok
           else
             render json: {status: 'ERROR', message:'Offer not saved', data:offer.errors},status: :unprocessable_entity
           end
