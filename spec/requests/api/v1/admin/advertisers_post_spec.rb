@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 describe "post advertiser route", :type => :request do
+  before(:each) do
+    @authorization = ActionController::HttpAuthentication::Basic.encode_credentials('admin123','admin123')
+  end
 
   describe 'Success' do
     describe 'when all the parameters are correct' do
       before do
-        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}
+        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return the advertiser' do
@@ -23,7 +26,7 @@ describe "post advertiser route", :type => :request do
   describe 'Fail' do
     describe 'when url parameter is not valid' do
       before do
-        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart@com'}
+        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart@com'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -38,7 +41,7 @@ describe "post advertiser route", :type => :request do
 
     describe 'when without needed params' do
       before do
-        post '/api/v1/admin/advertisers', params: {}
+        post '/api/v1/admin/advertisers', headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -54,7 +57,7 @@ describe "post advertiser route", :type => :request do
     describe 'when advertiser already exist' do
       before do
         Advertiser.create(name: 'Walmart', url: 'https://wallmart.com')
-        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}
+        post '/api/v1/admin/advertisers', params: {:name => 'Walmart', :url => 'https://wallmart.com'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do

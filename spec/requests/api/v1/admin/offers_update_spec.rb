@@ -2,6 +2,10 @@ require 'rails_helper'
 require "ostruct"
 
 describe "put offer route", :type => :request do
+  before(:each) do
+    @authorization = ActionController::HttpAuthentication::Basic.encode_credentials('admin123','admin123')
+  end
+
   let!(:offers) {FactoryBot.create(:offers)}
 
   describe 'Success' do
@@ -21,7 +25,7 @@ describe "put offer route", :type => :request do
           :description => @params.description,
           :starts_at => @params.starts_at,
           :ends_at => @params.ends_at
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return updated offer with the same values of parameters' do
@@ -46,7 +50,7 @@ describe "put offer route", :type => :request do
         {
           :starts_at => '2020-07-05 00:19:41',
           :ends_at => ''
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return updated offer with the same values at parameters' do
@@ -66,7 +70,7 @@ describe "put offer route", :type => :request do
         put "/api/v1/admin/offers/#{offers.id}", params:
         {
           :ends_at => '2020-07-05 00:19:41'
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return offer with the ends_date updated' do
@@ -98,7 +102,7 @@ describe "put offer route", :type => :request do
           :description => @params.description,
           :starts_at => @params.starts_at,
           :ends_at => @params.ends_at
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -127,7 +131,7 @@ describe "put offer route", :type => :request do
           :description => @params.description,
           :starts_at => @params.starts_at,
           :ends_at => @params.ends_at
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -156,7 +160,7 @@ describe "put offer route", :type => :request do
           :description => @params.description,
           :starts_at => @params.starts_at,
           :ends_at => @params.ends_at
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -185,7 +189,7 @@ describe "put offer route", :type => :request do
           :description => @params.description,
           :starts_at => @params.starts_at,
           :ends_at => @params.ends_at
-        }
+        }, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do

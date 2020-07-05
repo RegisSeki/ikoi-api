@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe "put advertiser route", :type => :request do
+  before(:each) do
+    @authorization = ActionController::HttpAuthentication::Basic.encode_credentials('admin123','admin123')
+  end
 
   describe 'Success' do
     let!(:advertiser) {FactoryBot.create(:advertisers)}
@@ -8,7 +11,7 @@ describe "put advertiser route", :type => :request do
     describe 'when all parameters are correct' do
 
       before do
-        put "/api/v1/admin/advertisers/#{advertiser.id}", params: {:name => 'Walmart', :url => 'https://wallmart.com'}
+        put "/api/v1/admin/advertisers/#{advertiser.id}", params: {:name => 'Walmart', :url => 'https://wallmart.com'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return the advertiser updated' do
@@ -31,7 +34,7 @@ describe "put advertiser route", :type => :request do
 
     describe 'when url not valid' do
       before do
-        put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Carrefour', :url => 'https://carrefour@com?@'}
+        put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Carrefour', :url => 'https://carrefour@com?@'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do
@@ -46,7 +49,7 @@ describe "put advertiser route", :type => :request do
 
     describe 'when advertiser name already exist' do
       before do
-        put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Walmart', :url => 'https://walmart.com'}
+        put "/api/v1/admin/advertisers/#{@trying_update_advertiser.id}", params: {:name => 'Walmart', :url => 'https://walmart.com'}, headers: { 'HTTP_AUTHORIZATION' => @authorization }
       end
 
       it 'return error' do

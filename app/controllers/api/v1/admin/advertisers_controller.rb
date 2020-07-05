@@ -4,7 +4,8 @@ module Api
   module V1
     module Admin
       class AdvertisersController < ApplicationController
-        http_basic_authenticate_with name: ENV['ADMIN_KEY'], password: ENV['ADMIN_SECRET'], except: :index
+        http_basic_authenticate_with name: ENV['ADMIN_KEY'], password: ENV['ADMIN_SECRET']
+
         def index
           advertisers = Advertiser.all
           render json: {status: 'SUCCESS', message: 'List of all advertisers', data:advertisers}, status: :ok

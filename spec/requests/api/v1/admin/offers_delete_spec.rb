@@ -5,7 +5,8 @@ describe "delete offer route", :type => :request do
 
   describe 'successully deleted' do
     before do
-      delete "/api/v1/admin/offers/#{offers.id}", params: {}
+      authorization = ActionController::HttpAuthentication::Basic.encode_credentials('admin123','admin123')
+      delete "/api/v1/admin/offers/#{offers.id}", headers: { 'HTTP_AUTHORIZATION' => authorization }
     end
 
     it 'return deleted offer' do

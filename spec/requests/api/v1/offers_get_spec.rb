@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe "get users list offers route", :type => :request do
+  before(:each) do
+    @authorization = ActionController::HttpAuthentication::Basic.encode_credentials('admin123','admin123')
+  end
+
   let!(:advertiser) {FactoryBot.create(:advertisers)}
 
   describe 'show offer have already started' do
@@ -10,7 +14,7 @@ describe "get users list offers route", :type => :request do
       @enabled_offer = Offer.create(advertiser_id: advertiser.id, url: 'https://enabled.com', description: 'Enabled', starts_at: already_start_time)
       Offer.create(advertiser_id: advertiser.id, url: 'https://disabled.com', description: 'Disabled', starts_at: future_time)
 
-      get '/api/v1/offers'
+      get '/api/v1/offers', headers: { 'HTTP_AUTHORIZATION' => @authorization }
     end
 
     it 'return only enabled offer' do
@@ -32,7 +36,7 @@ describe "get users list offers route", :type => :request do
       Offer.create(advertiser_id: advertiser.id, url: 'https://walmart.com', description: 'Any', starts_at: Time.now, ends_at: past_time)
       @enabled_offer = Offer.create(advertiser_id: advertiser.id, url: 'https://enabled.com', description: 'enabled', starts_at: Time.now)
 
-      get '/api/v1/offers'
+      get '/api/v1/offers', headers: { 'HTTP_AUTHORIZATION' => @authorization }
     end
 
     it 'return only starts_at with past_time' do
@@ -54,7 +58,7 @@ describe "get users list offers route", :type => :request do
       @second_premium = Offer.create(advertiser_id: advertiser.id, url: 'https://premium.com', description: 'Second', starts_at: Time.now, premium: true)
       @not_premium = Offer.create(advertiser_id: advertiser.id, url: 'https://not-premium.com', description: 'not-premium', starts_at: Time.now)
 
-      get '/api/v1/offers'
+      get '/api/v1/offers', headers: { 'HTTP_AUTHORIZATION' => @authorization }
     end
 
     it 'return the premium offers first' do
@@ -70,5 +74,4 @@ describe "get users list offers route", :type => :request do
       expect(response).to have_http_status(:success)
     end
   end
-
 end
