@@ -97,9 +97,9 @@ pear on top.
 
 To solve this rules the trick is at starts_at, ands_at and premium offers values
 
-1- To enable an offer the starts_at should be greater than the time at server at the moment of the request and the ends_at should be less; The administrator have to control enabled and disabled offers by this 2 rules. To do that just update the offer with the proper date and time.
-2- If have no ends_at and the starts_at is greater than the server request time, this offer will always appear.
-2- When the premium value is true, the offer will always appear on the top.
+1. To enable an offer the starts_at should be greater than the time at server at the moment of the request and the ends_at should be less; The administrator have to control enabled and disabled offers by this 2 rules. To do that just update the offer with the proper date and time.
+2. If have no ends_at and the starts_at is greater than the server request time, this offer will always appear.
+3. When the premium value is true, the offer will always appear on the top.
 
 ### Installation
 #### To run the project locally:
