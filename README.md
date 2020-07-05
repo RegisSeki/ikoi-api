@@ -113,9 +113,9 @@ To solve this rules the trick is at starts_at, ands_at and premium offers values
 ##### To Run the tests RSPEC
 At the project folder run ```rspec```
 
-This project is hosted at heroku on https://rts-lemoney-api.herokuapp.com/
+This project is hosted at heroku on https://rts-lemoney-api.herokuapp.com/ .
 All the get routes are free to access, the others need the login and password.
-Fell free to use all the get routes, if is necessary ask the keys to me on regis.seki@gmail.com.
+Fell free to use all the get routes, if necessary ask the keys to me on regis.seki@gmail.com.
 
 Made by [Regis Seki](https://github.com/RegisSeki)
 Last updated: July 2020
