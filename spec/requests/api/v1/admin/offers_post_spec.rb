@@ -14,7 +14,7 @@ describe "post offer route", :type => :request do
         post '/api/v1/admin/offers', params:
           {
             :advertiser_id => "#{advertiser.id}",
-            :url => "https://walmart.com/owesome-sale-2",
+            :url => 'https://www.americanas.com.br/produto/33720741/good-girl-legere-carolina-herrera-eau-de-parfum-perfume-feminino-50ml?chave=prf_hm_0_oh_3_00_',
             :description => "Freak owesome sale",
             :starts_at => "2020-07-03 20:30:00",
             :ends_at => "2020-07-13 20:30:00"
